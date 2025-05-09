@@ -1,13 +1,13 @@
 CREATE TABLE dim_countries
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_cities
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_dates
@@ -19,26 +19,26 @@ CREATE TABLE dim_dates
 CREATE TABLE dim_pet_types
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_pet_breeds
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_pet_categories
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_pets
 (
     id          BIGSERIAL PRIMARY KEY,
     type_id     BIGINT REFERENCES dim_pet_types (id),
-    name        VARCHAR(50),
+    name        VARCHAR(64),
     breed_id    BIGINT REFERENCES dim_pet_breeds (id),
     category_id BIGINT REFERENCES dim_pet_categories (id)
 );
@@ -46,66 +46,66 @@ CREATE TABLE dim_pets
 CREATE TABLE dim_customers
 (
     id          BIGSERIAL PRIMARY KEY,
-    first_name  VARCHAR(50),
-    last_name   VARCHAR(50),
+    first_name  VARCHAR(64),
+    last_name   VARCHAR(64),
     age         BIGINT,
-    email       VARCHAR(50),
+    email       VARCHAR(64),
     country_id  BIGINT REFERENCES dim_countries (id),
-    postal_code VARCHAR(50),
+    postal_code VARCHAR(64),
     pet_id      BIGINT REFERENCES dim_pets (id)
 );
 
 CREATE TABLE dim_sellers
 (
     id          BIGSERIAL PRIMARY KEY,
-    first_name  VARCHAR(50),
-    last_name   VARCHAR(50),
-    email       VARCHAR(50),
+    first_name  VARCHAR(64),
+    last_name   VARCHAR(64),
+    email       VARCHAR(64),
     country_id  BIGINT REFERENCES dim_countries (id),
-    postal_code VARCHAR(50)
+    postal_code VARCHAR(64)
 );
 
 CREATE TABLE dim_product_categories
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_product_colors
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_product_sizes
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_product_brands
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
-CREATE TABLE dim_product_materials
+CREATE TABLE dim_product_verbose
 (
     id   BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50)
+    name VARCHAR(64)
 );
 
 CREATE TABLE dim_products
 (
     id              BIGSERIAL PRIMARY KEY,
-    name            VARCHAR(50),
+    name            VARCHAR(64),
     category_id     BIGINT REFERENCES dim_product_categories (id),
     price           DECIMAL(10, 2),
     weight          FLOAT,
     color_id        BIGINT REFERENCES dim_product_colors (id),
     size_id         BIGINT REFERENCES dim_product_sizes (id),
     brand_id        BIGINT REFERENCES dim_product_brands (id),
-    material_id     BIGINT REFERENCES dim_product_materials (id),
+    material_id     BIGINT REFERENCES dim_product_verbose (id),
     description     VARCHAR(1024),
     rating          FLOAT,
     reviews         BIGINT,
@@ -116,23 +116,23 @@ CREATE TABLE dim_products
 CREATE TABLE dim_stores
 (
     id         BIGSERIAL PRIMARY KEY,
-    name       VARCHAR(50),
-    location   VARCHAR(50),
+    name       VARCHAR(64),
+    location   VARCHAR(64),
     city_id    BIGINT REFERENCES dim_cities (id),
-    state      VARCHAR(50),
+    state      VARCHAR(64),
     country_id BIGINT REFERENCES dim_countries (id),
-    phone      VARCHAR(50),
-    email      VARCHAR(50)
+    phone      VARCHAR(64),
+    email      VARCHAR(64)
 );
 
 CREATE TABLE dim_suppliers
 (
     id         BIGSERIAL PRIMARY KEY,
-    name       VARCHAR(50),
-    contact    VARCHAR(50),
-    email      VARCHAR(50),
-    phone      VARCHAR(50),
-    address    VARCHAR(50),
+    name       VARCHAR(64),
+    contact    VARCHAR(64),
+    email      VARCHAR(64),
+    phone      VARCHAR(64),
+    address    VARCHAR(64),
     city_id    BIGINT REFERENCES dim_cities (id),
     country_id BIGINT REFERENCES dim_countries (id)
 );
